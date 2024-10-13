@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("sigovia-backend")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+de30965deb92f67f39e67b0e8f95257eb17f4498")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d4d21062715f8c6ae91f980dbae7648789e45986")]
 [assembly: System.Reflection.AssemblyProductAttribute("sigovia-backend")]
 [assembly: System.Reflection.AssemblyTitleAttribute("sigovia-backend")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

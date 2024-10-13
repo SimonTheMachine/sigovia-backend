@@ -75,3 +75,6 @@ _ReSharper*/
 
 # Ignore Mac files
 .DS_Store
+
+# Ignore environment files
+.env
