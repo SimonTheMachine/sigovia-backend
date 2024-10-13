@@ -1,0 +1,6 @@
+@sigovia_backend_HostAddress = http://localhost:5038
+
+GET {{sigovia_backend_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
