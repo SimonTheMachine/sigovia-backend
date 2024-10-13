@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using sigovia_backend.api.Data;
+using sigovia_backend.api.Interfaces;
+using sigovia_backend.api.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +20,9 @@ builder.Services.AddDbContext<ApplicationDBContext>(options =>
 {
     options.UseSqlServer(connectionString);
 });
+
+builder.Services.AddScoped<IBookingRepository, BookingRepository>();
+
 
 var app = builder.Build();
 

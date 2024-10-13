@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using sigovia_backend.api.Data;
 using sigovia_backend.api.Dtos.Booking;
+using sigovia_backend.api.Interfaces;
 using sigovia_backend.api.Mappers;
 using sigovia_backend.api.Models;
 
@@ -16,15 +17,18 @@ namespace sigovia_backend.api.Controllers
     public class BookingController: ControllerBase
     {
         private readonly ApplicationDBContext _context;
-        public BookingController(ApplicationDBContext context)
+
+        private readonly IBookingRepository _bookingRepository;
+        public BookingController(ApplicationDBContext context, IBookingRepository bookingRepository)
         {
             _context = context;
+            _bookingRepository = bookingRepository;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var bookings = await _context.Bookings.ToListAsync();
+            var bookings = await _bookingRepository.GetAllAsync();
             return Ok(bookings);
         }
 
@@ -32,8 +36,7 @@ namespace sigovia_backend.api.Controllers
         public async Task<IActionResult> Create([FromBody] CreateBookingDto booking)
         {
             var bookingModel = booking.ToBookingFromCreateDTO();
-            _context.Bookings.Add(bookingModel);
-            await _context.SaveChangesAsync();
+            await _bookingRepository.CreateAsync(bookingModel);
             return Ok(booking);
         }
     }
