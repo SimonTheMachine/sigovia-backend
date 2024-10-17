@@ -78,3 +78,5 @@ _ReSharper*/
 
 # Ignore environment files
 .env
+.dev.env
+.prod.env
