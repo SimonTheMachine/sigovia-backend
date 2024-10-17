@@ -1,0 +1,16 @@
+services:
+  dotnet-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5001:8080"
+    networks:
+      - app-network
+    # The defaultconnection is loaded in from the .env file
+    environment:
+      - DefaultConnection=${DefaultConnection}
+
+networks:
+  app-network:
+    driver: bridge
