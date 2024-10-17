@@ -1,16 +1,35 @@
+version: "3.8"
+
 services:
-  dotnet-api:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "5001:8080"
-    networks:
-      - app-network
-    # The defaultconnection is loaded in from the .env file
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sigovia-local-db
     environment:
-      - DefaultConnection=${DefaultConnection}
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "dockerStrongPwd123"
+    ports:
+      - "1433:1433"
+    networks:
+      - sigovia-network
+    volumes:
+      - sqlserver-data:/var/opt/mssql
+
+  backend:
+    image: sigovia-backend # Assuming you've already built this image
+    container_name: sigovia-backend
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      DefaultConnection: "Server=sigovia-local-db,1433;Database=DevDatabase;User Id=sa;Password=dockerStrongPwd123;TrustServerCertificate=True;"
+    ports:
+      - "8080:8080"
+    depends_on:
+      - sqlserver
+    networks:
+      - sigovia-network
 
 networks:
-  app-network:
+  sigovia-network:
     driver: bridge
+
+volumes:
+  sqlserver-data:
