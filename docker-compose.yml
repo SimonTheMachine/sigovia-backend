@@ -1,7 +1,7 @@
 version: "3.8"
 
 services:
-  sqlserver:
+  local-db:
     image: mcr.microsoft.com/mssql/server:2022-latest
     container_name: sigovia-local-db
     environment:
@@ -15,15 +15,14 @@ services:
       - sqlserver-data:/var/opt/mssql
 
   backend:
-    image: sigovia-backend # Assuming you've already built this image
+    image: sigovia-backend
     container_name: sigovia-backend
-    environment:
-      ASPNETCORE_ENVIRONMENT: Development
-      DefaultConnection: "Server=sigovia-local-db,1433;Database=DevDatabase;User Id=sa;Password=dockerStrongPwd123;TrustServerCertificate=True;"
+    env_file:
+      - ./.dev.env
     ports:
       - "8080:8080"
     depends_on:
-      - sqlserver
+      - local-db
     networks:
       - sigovia-network
 
