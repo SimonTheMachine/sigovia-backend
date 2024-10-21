@@ -8,7 +8,7 @@ while IFS= read -r line || [ -n "$line" ]; do
   if [[ ! "$line" =~ ^# && "$line" =~ .*=.* ]]; then
     export "$line"
   fi
-done < config/.env
+done < config/.server-on-host-machine.env
 
 # Run the application with dotnet from the project root
 dotnet watch run

@@ -23,7 +23,7 @@ services:
       dockerfile: config/server.Dockerfile
     container_name: sigovia-backend
     env_file:
-      - .dev.env
+      - .server-in-container.env
     ports:
       - "8080:8080"
     depends_on:
