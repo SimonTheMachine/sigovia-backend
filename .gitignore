@@ -80,3 +80,4 @@ _ReSharper*/
 .env
 .dev.env
 .prod.env
+.local.dev.env
