@@ -2,5 +2,8 @@ node_modules
 dist
 .git
 .gitignore
-Dockerfile
-docker-compose.yml
+config/Dockerfile
+config/docker-compose.yml
+bin
+obj
+.vscode

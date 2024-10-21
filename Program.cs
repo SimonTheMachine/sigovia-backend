@@ -48,8 +48,6 @@ using (var scope = app.Services.CreateScope())
 app.UseSwagger();
 app.UseSwaggerUI();
 
-app.UseHttpsRedirection();
-
 app.UseCors(x => x
      .AllowAnyMethod()
      .AllowAnyHeader()
@@ -61,7 +59,8 @@ app.UseCors(x => x
 
 app.UseHttpsRedirection();
 
-
 app.MapControllers();
 
 app.Run();
+
+Console.WriteLine("Done setting up program.cs");

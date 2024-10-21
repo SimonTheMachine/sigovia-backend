@@ -1,8 +1,13 @@
-version: "3.8"
+# Run from the root folder
+# ````
+# docker-compose -f config/docker-compose.yml up --build
+# ````
 
 services:
   local-db:
-    image: mcr.microsoft.com/mssql/server:2022-latest
+    build:
+      context: ..
+      dockerfile: config/database.Dockerfile
     container_name: sigovia-local-db
     environment:
       ACCEPT_EULA: "Y"
@@ -11,14 +16,14 @@ services:
       - "1433:1433"
     networks:
       - sigovia-network
-    volumes:
-      - sqlserver-data:/var/opt/mssql
 
   backend:
-    image: sigovia-backend
+    build:
+      context: ..
+      dockerfile: config/server.Dockerfile
     container_name: sigovia-backend
     env_file:
-      - ./.dev.env
+      - .dev.env
     ports:
       - "8080:8080"
     depends_on:
@@ -29,6 +34,3 @@ services:
 networks:
   sigovia-network:
     driver: bridge
-
-volumes:
-  sqlserver-data:

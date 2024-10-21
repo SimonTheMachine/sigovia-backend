@@ -77,7 +77,7 @@ _ReSharper*/
 .DS_Store
 
 # Ignore environment files
-.env
-.dev.env
-.prod.env
-.local.dev.env
+config/.env
+config/.dev.env
+config/.prod.env
+config/.local.dev.env
